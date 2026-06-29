@@ -1,0 +1,23 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.18.1",
+    "cheerio": "^1.2.0",
+    "cors": "^2.8.6",
+    "duck-duck-scrape": "^2.2.7",
+    "express": "^5.2.1",
+    "genius-lyrics": "^4.4.7",
+    "lyrics-finder": "^21.7.0",
+    "youtube-music-api": "^1.0.6",
+    "yt-search": "^2.13.1"
+  }
+}
