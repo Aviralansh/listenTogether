@@ -682,6 +682,9 @@ function App() {
           </motion.div>
           )}
           
+        </div>
+      </main>
+
           {/* Lyrics Panel Overlay */}
           <AnimatePresence>
              {showLyrics && currentSong && (
@@ -733,10 +736,8 @@ function App() {
                       </div>
                    </div>
                 </motion.div>
-             )}
-          </AnimatePresence>
-        </div>
-      </main>
+              )}
+           </AnimatePresence>
 
         {/* Player Bar */}
         <div className="player-bar glass-panel">
