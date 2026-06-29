@@ -354,6 +354,12 @@ function App() {
 
   return (
     <div className="app-container">
+      {/* Ambient Dynamic Background */}
+      <div className="ambient-background">
+         <img src={currentSong ? currentSong.albumArt : 'https://images.unsplash.com/photo-1614149162883-504ce4d13909?q=80&w=1000&auto=format&fit=crop'} alt="" className="ambient-art" />
+         <div className="ambient-overlay"></div>
+      </div>
+
       {/* Hidden YouTube Player */}
       <div style={{ position: 'absolute', top: '-9999px', left: '-9999px', opacity: 0 }}>
         {currentSong && currentSong.ytId && (
@@ -707,6 +713,7 @@ function App() {
              )}
           </AnimatePresence>
         </div>
+      </main>
 
         {/* Player Bar */}
         <div className="player-bar glass-panel">
@@ -774,7 +781,6 @@ function App() {
             </div>
           </div>
         </div>
-      </main>
     </div>
   );
 }
