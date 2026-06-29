@@ -89,7 +89,7 @@ function App() {
     const timer = setTimeout(async () => {
       setIsSearching(true);
       try {
-        const res = await fetch(`http://localhost:3001/search?q=${encodeURIComponent(searchQuery)}`);
+        const res = await fetch(`/api/search?q=${encodeURIComponent(searchQuery)}`);
         const data = await res.json();
         if (Array.isArray(data)) setSearchResults(data);
       } catch (err) {
@@ -669,10 +669,10 @@ function App() {
                    exit={{ y: '100%' }}
                    transition={{ type: 'spring', damping: 25, stiffness: 200 }}
                    style={{
-                      position: 'absolute', top: 0, left: 0, right: 0, bottom: 0,
+                      position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
                       background: 'rgba(15, 17, 26, 0.98)',
                       backdropFilter: 'blur(40px)',
-                      zIndex: 50,
+                      zIndex: 9999,
                       padding: '60px 40px',
                       display: 'flex',
                       flexDirection: 'column'

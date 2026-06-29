@@ -270,12 +270,19 @@ h1, h2, h3 {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  overflow: hidden;
+  min-width: 0;
+  flex: 1;
 }
 
 .song-title {
   font-weight: 600;
   font-size: 15px;
   letter-spacing: -0.2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
 }
 
 .song-artist {
