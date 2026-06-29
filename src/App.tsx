@@ -116,7 +116,7 @@ function App() {
   }, [isPlaying, ytPlayer, currentSong?.ytId]);
 
   useEffect(() => {
-    let interval: NodeJS.Timeout;
+    let interval: ReturnType<typeof setInterval>;
     if (isPlaying && ytPlayer) {
       interval = setInterval(async () => {
         try {
