@@ -9,11 +9,16 @@ import {
 import { peerService } from './services/PeerService';
 import './App.css';
 
-const mockSongs = [
-  { id: '1', title: 'Blinding Lights', artist: 'The Weeknd', albumArt: 'https://i.scdn.co/image/ab67616d0000b2738863bc11d2aa12b54f5aeb36', ytId: '4NRXx6U8ABQ', lyrics: "I said, ooh, I'm blinded by the lights\nNo, I can't sleep until I feel your touch\nI said, ooh, I'm drowning in the night\nOh, when I'm like this, you're the one I trust" },
-  { id: '2', title: 'Shape of You', artist: 'Ed Sheeran', albumArt: 'https://i.scdn.co/image/ab67616d0000b273ba5db46f4b838ef6027e6f96', ytId: 'JGwWNGJdvx8', lyrics: "The club isn't the best place to find a lover\nSo the bar is where I go\nMe and my friends at the table doing shots\nDrinking fast and then we talk slow" },
-  { id: '3', title: 'Levitating', artist: 'Dua Lipa', albumArt: 'https://i.scdn.co/image/ab67616d0000b273bd26ede1ae69327010d49946', ytId: 'TUVcZfQe-Kw', lyrics: "If you wanna run away with me, I know a galaxy\nAnd I can take you for a ride\nI had a premonition that we fell into a rhythm\nWhere the music don't stop for life" },
-  { id: '4', title: 'As It Was', artist: 'Harry Styles', albumArt: 'https://i.scdn.co/image/ab67616d0000b273b46f74097655d7f353caab14', ytId: 'H5v3kku4y6Q', lyrics: "Holdin' me back\nGravity's holdin' me back\nI want you to hold out the palm of your hand\nWhy don't we leave it at that?" }
+const developerFavs = [
+  { id: 'mj1', title: 'Billie Jean', artist: 'Michael Jackson', albumArt: 'https://i.scdn.co/image/ab67616d0000b2734121faee8df82c506cb889ad', ytId: 'Zi_XLOBDo_Y', lyrics: "" },
+  { id: 'mj2', title: 'Bad', artist: 'Michael Jackson', albumArt: 'https://i.scdn.co/image/ab67616d0000b27357077a06283b5443af18b2f1', ytId: 'dsUXAEzaC3Q', lyrics: "" },
+  { id: 'mj3', title: 'Heaven Can Wait', artist: 'Michael Jackson', albumArt: 'https://i.scdn.co/image/ab67616d0000b27318ec7e82b7bd5e0e0a5c7eb1', ytId: '4XJmS9iNlIE', lyrics: "" }
+];
+
+const trendingMusic = [
+  { id: 't1', title: 'Espresso', artist: 'Sabrina Carpenter', albumArt: 'https://i.scdn.co/image/ab67616d0000b2738a5b2879f97d3ca66fcc4809', ytId: 'eVli-tstM5E', lyrics: "" },
+  { id: 't2', title: 'Not Like Us', artist: 'Kendrick Lamar', albumArt: 'https://i.scdn.co/image/ab67616d0000b2738cf9cb99e90954b85ce3df78', ytId: 'T6eK-2OQtew', lyrics: "" },
+  { id: 't3', title: 'Starboy', artist: 'The Weeknd', albumArt: 'https://i.scdn.co/image/ab67616d0000b2734718e2b124f79258be7bc452', ytId: '34Na4j8HLjc', lyrics: "" }
 ];
 
 const ytOpts = {
@@ -41,7 +46,7 @@ function App() {
   const [searchQuery, setSearchQuery] = useState('');
   
   // YouTube Search State
-  const [searchResults, setSearchResults] = useState<any[]>(mockSongs);
+  const [searchResults, setSearchResults] = useState<any[]>([]);
   const [isSearching, setIsSearching] = useState(false);
   
   // New features state
@@ -83,7 +88,7 @@ function App() {
   // YouTube API Search Integration
   useEffect(() => {
     if (!searchQuery.trim()) {
-      setSearchResults(mockSongs);
+      setSearchResults([]);
       return;
     }
     const timer = setTimeout(async () => {
@@ -513,46 +518,64 @@ function App() {
         <div className="content-area glass-panel">
           {activeTab === 'search' && (
              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-                <h2 style={{ marginBottom: '20px' }}>
-                   {searchQuery ? `Top Results for "${searchQuery}"` : 'Discover'}
-                </h2>
-                
-                {isSearching && (
-                   <div style={{ padding: '20px', color: 'var(--text-muted)' }}>Searching YouTube...</div>
-                )}
-                
-                {!isSearching && (
-                   <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                      {searchQuery && searchResults.length === 0 && <div style={{ color: 'var(--text-muted)' }}>No songs found on YouTube.</div>}
-                      {(searchQuery ? searchResults : mockSongs).map(song => (
-                        <div key={song.id} className="search-result-item" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'var(--glass-bg)', padding: '12px 16px', borderRadius: '12px' }}>
-                           <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-                              <img src={song.albumArt} alt="Album Art" style={{ width: '48px', height: '48px', borderRadius: '8px', objectFit: 'cover' }} />
-                              <div>
-                                 <div style={{ fontWeight: '600' }}>{song.title}</div>
-                                 <div style={{ fontSize: '13px', color: 'var(--text-muted)' }}>{song.artist}</div>
-                              </div>
-                           </div>
-                           <div className="search-result-actions" style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
-                               <button 
-                                 title="Like this song" 
-                                 onClick={(e) => toggleLike(song, e)} 
-                                 style={{ padding: '8px' }}
-                               >
-                                  <Heart size={20} fill={likedSongMap.has(song.id) ? '#ff416c' : 'none'} color={likedSongMap.has(song.id) ? '#ff416c' : 'var(--text-muted)'} />
-                               </button>
-                               <button title="Play Song" onClick={() => handlePlay(song)} style={{ background: 'var(--text-main)', color: 'var(--bg-dark)', padding: '8px 16px', borderRadius: '100px', fontWeight: 'bold' }}>Play</button>
-                               <button 
-                                 title={queue.some(q => q.ytId === song.ytId) || currentSong?.ytId === song.ytId ? "In Queue" : "Add to Queue"} 
-                                 onClick={() => handleAddToQueue(song)} 
-                                 style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'var(--glass-hover)', border: '1px solid var(--glass-border)', padding: '8px 16px', borderRadius: '100px', fontWeight: 'bold', color: 'var(--text-main)' }}
-                               >
-                                 {queue.some(q => q.ytId === song.ytId) || currentSong?.ytId === song.ytId ? <Check size={16} color="#1DB954" /> : <Plus size={16}/>} 
-                                 {queue.some(q => q.ytId === song.ytId) || currentSong?.ytId === song.ytId ? 'In Queue' : 'Queue'}
-                               </button>
-                            </div>
+                {searchQuery ? (
+                   <>
+                      <h2 style={{ marginBottom: '20px' }}>Top Results for "{searchQuery}"</h2>
+                      {isSearching ? (
+                         <div style={{ padding: '20px', color: 'var(--text-muted)' }}>Searching YouTube...</div>
+                      ) : (
+                         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                            {searchResults.length === 0 && <div style={{ color: 'var(--text-muted)' }}>No songs found on YouTube.</div>}
+                            {searchResults.map(song => (
+                               <div key={song.id} className="search-result-item" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'var(--glass-bg)', padding: '12px 16px', borderRadius: '12px' }}>
+                                  <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                                     <img src={song.albumArt} alt="Album Art" style={{ width: '48px', height: '48px', borderRadius: '8px', objectFit: 'cover' }} />
+                                     <div>
+                                        <div className="song-title" style={{ fontWeight: '600', maxWidth: '200px' }}>{song.title}</div>
+                                        <div style={{ fontSize: '13px', color: 'var(--text-muted)' }}>{song.artist}</div>
+                                     </div>
+                                  </div>
+                                  <div className="search-result-actions" style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+                                      <button title="Like this song" onClick={(e) => toggleLike(song, e)} style={{ padding: '8px' }}>
+                                         <Heart size={20} fill={likedSongMap.has(song.id) ? '#ff416c' : 'none'} color={likedSongMap.has(song.id) ? '#ff416c' : 'var(--text-muted)'} />
+                                      </button>
+                                      <button title="Play Song" onClick={() => handlePlay(song)} style={{ background: 'var(--text-main)', color: 'var(--bg-dark)', padding: '8px 16px', borderRadius: '100px', fontWeight: 'bold' }}>Play</button>
+                                      <button title={queue.some(q => q.ytId === song.ytId) || currentSong?.ytId === song.ytId ? "In Queue" : "Add to Queue"} onClick={() => handleAddToQueue(song)} style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'var(--glass-hover)', border: '1px solid var(--glass-border)', padding: '8px 16px', borderRadius: '100px', fontWeight: 'bold', color: 'var(--text-main)' }}>
+                                        {queue.some(q => q.ytId === song.ytId) || currentSong?.ytId === song.ytId ? <Check size={16} color="#1DB954" /> : <Plus size={16}/>} {queue.some(q => q.ytId === song.ytId) || currentSong?.ytId === song.ytId ? 'In Queue' : 'Queue'}
+                                      </button>
+                                   </div>
+                                </div>
+                            ))}
                          </div>
-                      ))}
+                      )}
+                   </>
+                ) : (
+                   <div style={{ display: 'flex', flexDirection: 'column', gap: '32px', paddingBottom: '40px' }}>
+                      <div>
+                         <h2 style={{ marginBottom: '20px', fontSize: '24px', letterSpacing: '-0.5px' }}>Developer Favs 👑</h2>
+                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: '20px' }}>
+                            {developerFavs.map(song => (
+                               <div key={song.id} style={{ background: 'var(--glass-bg)', padding: '16px', borderRadius: '16px', border: '1px solid var(--glass-border)', transition: 'transform 0.2s', cursor: 'pointer' }} onClick={() => handlePlay(song)}>
+                                  <img src={song.albumArt} style={{ width: '100%', aspectRatio: '1', objectFit: 'cover', borderRadius: '12px', marginBottom: '12px', boxShadow: '0 8px 16px rgba(0,0,0,0.3)' }} />
+                                  <div className="song-title">{song.title}</div>
+                                  <div style={{ fontSize: '13px', color: 'var(--text-muted)' }}>{song.artist}</div>
+                               </div>
+                            ))}
+                         </div>
+                      </div>
+                      
+                      <div>
+                         <h2 style={{ marginBottom: '20px', fontSize: '24px', letterSpacing: '-0.5px' }}>Trending on YT Music 🔥</h2>
+                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: '20px' }}>
+                            {trendingMusic.map(song => (
+                               <div key={song.id} style={{ background: 'var(--glass-bg)', padding: '16px', borderRadius: '16px', border: '1px solid var(--glass-border)', transition: 'transform 0.2s', cursor: 'pointer' }} onClick={() => handlePlay(song)}>
+                                  <img src={song.albumArt} style={{ width: '100%', aspectRatio: '1', objectFit: 'cover', borderRadius: '12px', marginBottom: '12px', boxShadow: '0 8px 16px rgba(0,0,0,0.3)' }} />
+                                  <div className="song-title">{song.title}</div>
+                                  <div style={{ fontSize: '13px', color: 'var(--text-muted)' }}>{song.artist}</div>
+                               </div>
+                            ))}
+                         </div>
+                      </div>
                    </div>
                 )}
              </motion.div>
