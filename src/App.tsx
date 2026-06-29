@@ -10,15 +10,15 @@ import { peerService } from './services/PeerService';
 import './App.css';
 
 const developerFavs = [
-  { id: 'mj1', title: 'Billie Jean', artist: 'Michael Jackson', albumArt: 'https://i.scdn.co/image/ab67616d0000b2734121faee8df82c506cb889ad', ytId: 'Zi_XLOBDo_Y', lyrics: "" },
-  { id: 'mj2', title: 'Bad', artist: 'Michael Jackson', albumArt: 'https://i.scdn.co/image/ab67616d0000b27357077a06283b5443af18b2f1', ytId: 'dsUXAEzaC3Q', lyrics: "" },
-  { id: 'mj3', title: 'Heaven Can Wait', artist: 'Michael Jackson', albumArt: 'https://i.scdn.co/image/ab67616d0000b27318ec7e82b7bd5e0e0a5c7eb1', ytId: '4XJmS9iNlIE', lyrics: "" }
+  { id: 'mj1', title: 'Billie Jean', artist: 'Michael Jackson', albumArt: 'https://upload.wikimedia.org/wikipedia/en/5/55/Michael_Jackson_-_Thriller.png', ytId: 'Zi_XLOBDo_Y', lyrics: "" },
+  { id: 'mj2', title: 'Bad', artist: 'Michael Jackson', albumArt: 'https://upload.wikimedia.org/wikipedia/en/5/55/Michael_Jackson_-_Bad.png', ytId: 'dsUXAEzaC3Q', lyrics: "" },
+  { id: 'mj3', title: 'Heaven Can Wait', artist: 'Michael Jackson', albumArt: 'https://upload.wikimedia.org/wikipedia/en/9/98/Michael_Jackson_-_Invincible.png', ytId: '4XJmS9iNlIE', lyrics: "" }
 ];
 
 const trendingMusic = [
-  { id: 't1', title: 'Espresso', artist: 'Sabrina Carpenter', albumArt: 'https://i.scdn.co/image/ab67616d0000b2738a5b2879f97d3ca66fcc4809', ytId: 'eVli-tstM5E', lyrics: "" },
-  { id: 't2', title: 'Not Like Us', artist: 'Kendrick Lamar', albumArt: 'https://i.scdn.co/image/ab67616d0000b2738cf9cb99e90954b85ce3df78', ytId: 'T6eK-2OQtew', lyrics: "" },
-  { id: 't3', title: 'Starboy', artist: 'The Weeknd', albumArt: 'https://i.scdn.co/image/ab67616d0000b2734718e2b124f79258be7bc452', ytId: '34Na4j8HLjc', lyrics: "" }
+  { id: 't1', title: 'Espresso', artist: 'Sabrina Carpenter', albumArt: 'https://upload.wikimedia.org/wikipedia/en/d/dc/Sabrina_Carpenter_-_Espresso.png', ytId: 'eVli-tstM5E', lyrics: "" },
+  { id: 't2', title: 'Not Like Us', artist: 'Kendrick Lamar', albumArt: 'https://upload.wikimedia.org/wikipedia/en/4/41/Kendrick_Lamar_-_Not_Like_Us.png', ytId: 'T6eK-2OQtew', lyrics: "" },
+  { id: 't3', title: 'Starboy', artist: 'The Weeknd', albumArt: 'https://upload.wikimedia.org/wikipedia/en/3/39/The_Weeknd_-_Starboy.png', ytId: '34Na4j8HLjc', lyrics: "" }
 ];
 
 const ytOpts = {
@@ -552,7 +552,7 @@ function App() {
                 ) : (
                    <div style={{ display: 'flex', flexDirection: 'column', gap: '32px', paddingBottom: '40px' }}>
                       <div>
-                         <h2 style={{ marginBottom: '20px', fontSize: '24px', letterSpacing: '-0.5px' }}>Developer Favs 👑</h2>
+                         <h2 style={{ marginBottom: '20px', fontSize: '24px', letterSpacing: '-0.5px' }}>Developer Favs</h2>
                          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: '20px' }}>
                             {developerFavs.map(song => (
                                <div key={song.id} style={{ background: 'var(--glass-bg)', padding: '16px', borderRadius: '16px', border: '1px solid var(--glass-border)', transition: 'transform 0.2s', cursor: 'pointer' }} onClick={() => handlePlay(song)}>
@@ -565,7 +565,7 @@ function App() {
                       </div>
                       
                       <div>
-                         <h2 style={{ marginBottom: '20px', fontSize: '24px', letterSpacing: '-0.5px' }}>Trending on YT Music 🔥</h2>
+                         <h2 style={{ marginBottom: '20px', fontSize: '24px', letterSpacing: '-0.5px' }}>Trending on YT Music</h2>
                          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: '20px' }}>
                             {trendingMusic.map(song => (
                                <div key={song.id} style={{ background: 'var(--glass-bg)', padding: '16px', borderRadius: '16px', border: '1px solid var(--glass-border)', transition: 'transform 0.2s', cursor: 'pointer' }} onClick={() => handlePlay(song)}>
