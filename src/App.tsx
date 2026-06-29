@@ -10,15 +10,15 @@ import { peerService } from './services/PeerService';
 import './App.css';
 
 const developerFavs = [
-  { id: 'mj1', title: 'Billie Jean', artist: 'Michael Jackson', albumArt: 'https://upload.wikimedia.org/wikipedia/en/5/55/Michael_Jackson_-_Thriller.png', ytId: 'Zi_XLOBDo_Y', lyrics: "" },
-  { id: 'mj2', title: 'Bad', artist: 'Michael Jackson', albumArt: 'https://upload.wikimedia.org/wikipedia/en/5/55/Michael_Jackson_-_Bad.png', ytId: 'dsUXAEzaC3Q', lyrics: "" },
-  { id: 'mj3', title: 'Heaven Can Wait', artist: 'Michael Jackson', albumArt: 'https://upload.wikimedia.org/wikipedia/en/9/98/Michael_Jackson_-_Invincible.png', ytId: '4XJmS9iNlIE', lyrics: "" }
+  { id: 'mj1', title: 'Billie Jean', artist: 'Michael Jackson', albumArt: 'https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/32/4f/fd/324ffda2-9e51-8f6a-0c2d-c6fd2b41ac55/074643811224.jpg/600x600bb.jpg', ytId: 'Zi_XLOBDo_Y', lyrics: "" },
+  { id: 'mj2', title: 'Bad', artist: 'Michael Jackson', albumArt: 'https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/f7/be/db/f7bedbe7-8ef8-36ae-f227-d407e1cf0ec6/MichaelJackson_BadRemastered_G010002832827D_F_001_RGB.jpeg/600x600bb.jpg', ytId: 'dsUXAEzaC3Q', lyrics: "" },
+  { id: 'mj3', title: 'Heaven Can Wait', artist: 'Michael Jackson', albumArt: 'https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/dc/02/ef/dc02eff2-027c-a468-7d7b-aa9404e74f1a/mzi.mgytcnob.jpg/600x600bb.jpg', ytId: '4XJmS9iNlIE', lyrics: "" }
 ];
 
 const trendingMusic = [
-  { id: 't1', title: 'Espresso', artist: 'Sabrina Carpenter', albumArt: 'https://upload.wikimedia.org/wikipedia/en/d/dc/Sabrina_Carpenter_-_Espresso.png', ytId: 'eVli-tstM5E', lyrics: "" },
-  { id: 't2', title: 'Not Like Us', artist: 'Kendrick Lamar', albumArt: 'https://upload.wikimedia.org/wikipedia/en/4/41/Kendrick_Lamar_-_Not_Like_Us.png', ytId: 'T6eK-2OQtew', lyrics: "" },
-  { id: 't3', title: 'Starboy', artist: 'The Weeknd', albumArt: 'https://upload.wikimedia.org/wikipedia/en/3/39/The_Weeknd_-_Starboy.png', ytId: '34Na4j8HLjc', lyrics: "" }
+  { id: 't1', title: 'Espresso', artist: 'Sabrina Carpenter', albumArt: 'https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/57/e8/7b/57e87ba0-5057-9bb9-c247-ce7dbe426e89/24UMGIM55213.rgb.jpg/600x600bb.jpg', ytId: 'eVli-tstM5E', lyrics: "" },
+  { id: 't2', title: 'Not Like Us', artist: 'Kendrick Lamar', albumArt: 'https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/31/3a/3f/313a3fbc-bb8f-80c7-b5a2-e226869a38cd/24UMGIM51924.rgb.jpg/600x600bb.jpg', ytId: 'T6eK-2OQtew', lyrics: "" },
+  { id: 't3', title: 'Starboy', artist: 'The Weeknd', albumArt: 'https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/b5/92/bb/b592bb72-52e3-e756-9b26-9f56d08f47ab/16UMGIM67864.rgb.jpg/600x600bb.jpg', ytId: '34Na4j8HLjc', lyrics: "" }
 ];
 
 const ytOpts = {
