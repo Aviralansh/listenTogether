@@ -7,6 +7,7 @@ import {
   SkipBack, SkipForward, Repeat, Shuffle, Volume2, Mic2, ListMusic, X, Copy, Check, Plus
 } from 'lucide-react';
 import { peerService } from './services/PeerService';
+import { config } from './config';
 import './App.css';
 
 const developerFavs = [
@@ -21,15 +22,7 @@ const trendingMusic = [
   { id: 't3', title: 'Starboy', artist: 'The Weeknd', albumArt: 'https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/b5/92/bb/b592bb72-52e3-e756-9b26-9f56d08f47ab/16UMGIM67864.rgb.jpg/600x600bb.jpg', ytId: '34Na4j8HLjc', lyrics: "" }
 ];
 
-const ytOpts = {
-  height: '10',
-  width: '10',
-  playerVars: {
-    autoplay: 0,
-    controls: 0,
-    disablekb: 1
-  },
-};
+const ytOpts = config.YT_OPTS;
 
 function App() {
   const [activeTab, setActiveTab] = useState('home');
@@ -94,9 +87,7 @@ function App() {
     const timer = setTimeout(async () => {
       setIsSearching(true);
       try {
-        const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.hostname.startsWith('192.168.');
-        const API_BASE = isLocal ? '/api' : 'https://REPLACE_ME_WITH_RENDER_URL.onrender.com';
-        const res = await fetch(`${API_BASE}/search?q=${encodeURIComponent(searchQuery)}`);
+        const res = await fetch(`${config.API_BASE}/search?q=${encodeURIComponent(searchQuery)}`);
         if (!res.ok) throw new Error("Backend not available");
         const data = await res.json();
         if (Array.isArray(data)) setSearchResults(data);
@@ -151,7 +142,7 @@ function App() {
     
     const cleanTitle = currentSong.title.replace(/\[.*?\]|\(.*?\)|official|video|music|audio|lyric|lyrics/gi, '').trim();
     // Prefer searching only by title first as it's cleaner
-    fetch(`https://lrclib.net/api/search?q=${encodeURIComponent(cleanTitle)}`)
+    fetch(`${config.LYRICS_API}?q=${encodeURIComponent(cleanTitle)}`)
       .then(async res => {
           if (!res.ok) throw new Error("Lyrics API Error");
           return res.json();

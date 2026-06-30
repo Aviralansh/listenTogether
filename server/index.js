@@ -3,6 +3,7 @@ const cors = require('cors');
 const yts = require('yt-search');
 const axios = require('axios');
 const cheerio = require('cheerio');
+const config = require('./config');
 
 const app = express();
 app.use(cors());
@@ -38,7 +39,7 @@ app.get('/lyrics', async (req, res) => {
     // Step 1: Search Genius public API
     const searchGenius = async (q) => {
         try {
-            const res = await axios.get(`https://genius.com/api/search/multi?per_page=1&q=${encodeURIComponent(q)}`);
+            const res = await axios.get(`${config.GENIUS_API_URL}?per_page=1&q=${encodeURIComponent(q)}`);
             return res.data?.response?.sections?.[0]?.hits?.[0]?.result?.url;
         } catch(e) { return null; }
     };
@@ -76,5 +77,4 @@ app.get('/lyrics', async (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 3001;
-app.listen(PORT, '0.0.0.0', () => console.log(`YouTube Search backend running on port ${PORT}`));
+app.listen(config.PORT, config.HOST, () => console.log(`YouTube Search backend running on port ${config.PORT}`));
