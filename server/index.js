@@ -76,4 +76,5 @@ app.get('/lyrics', async (req, res) => {
   }
 });
 
-app.listen(3001, '0.0.0.0', () => console.log('YouTube Search proxy running on port 3001'));
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, '0.0.0.0', () => console.log(`YouTube Search backend running on port ${PORT}`));

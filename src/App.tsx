@@ -94,7 +94,10 @@ function App() {
     const timer = setTimeout(async () => {
       setIsSearching(true);
       try {
-        const res = await fetch(`/api/search?q=${encodeURIComponent(searchQuery)}`);
+        const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.hostname.startsWith('192.168.');
+        const API_BASE = isLocal ? '/api' : 'https://REPLACE_ME_WITH_RENDER_URL.onrender.com';
+        const res = await fetch(`${API_BASE}/search?q=${encodeURIComponent(searchQuery)}`);
+        if (!res.ok) throw new Error("Backend not available");
         const data = await res.json();
         if (Array.isArray(data)) setSearchResults(data);
       } catch (err) {
