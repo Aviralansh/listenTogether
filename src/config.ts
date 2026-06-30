@@ -5,7 +5,7 @@ export const config = {
     window.location.hostname === '127.0.0.1' || 
     window.location.hostname.startsWith('192.168.') 
       ? '/api' 
-      : 'https://REPLACE_ME_WITH_RENDER_URL.onrender.com'
+      : 'https://listentogether-ztf5.onrender.com'
   ),
   
   // Public Lyrics API
