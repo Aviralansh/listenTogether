@@ -149,7 +149,10 @@ function App() {
     const cleanTitle = currentSong.title.replace(/\[.*?\]|\(.*?\)|official|video|music|audio|lyric|lyrics/gi, '').trim();
     // Prefer searching only by title first as it's cleaner
     fetch(`https://lrclib.net/api/search?q=${encodeURIComponent(cleanTitle)}`)
-      .then(res => res.json())
+      .then(async res => {
+          if (!res.ok) throw new Error("Lyrics API Error");
+          return res.json();
+      })
       .then(data => {
          if (data && data.length > 0) {
             const track = data[0];
@@ -165,7 +168,10 @@ function App() {
             setCurrentLyrics("Lyrics not found for this track.");
          }
       })
-      .catch(() => setCurrentLyrics("Error fetching lyrics."));
+      .catch((err) => {
+         console.error("Lyrics fetch failed:", err);
+         setCurrentLyrics("Lyrics service temporarily down (lrclib.net is offline).");
+      });
   }, [currentSong]);
 
   // Auto-scroll synced lyrics
